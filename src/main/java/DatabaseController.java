@@ -1,10 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DatabaseController {
 
@@ -45,20 +42,41 @@ public class DatabaseController {
         }
     }
 
-    public void getAllStudents() {
-
+    public ResultSet getAllStudents() {
+        try {
+            statement.executeQuery("SELECT * FROM students");
+            return statement.getResultSet();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return null;
     }
 
     public void addStudent(String first_name, String last_name, String email, String enrollment_date) {
-
+        try {
+            statement.executeUpdate(String.format("INSERT INTO students (first_name, last_name, email, enrollment_date) VALUES ('%s', '%s', '%s', '%s');", first_name, last_name, email, enrollment_date));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     public void updateStudentEmail(int student_id, String new_email) {
-
+        try {
+            statement.executeUpdate(String.format("UPDATE students SET email='%s' WHERE student_id=%d;", new_email, student_id));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     public void deleteStudent(int student_id) {
-
+        try {
+            statement.executeUpdate(String.format("DELETE FROM students WHERE student_id=%d", student_id));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String parseSQLFile(String filename) {
