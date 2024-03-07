@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseController {
 
@@ -42,15 +43,19 @@ public class DatabaseController {
         }
     }
 
-    public ResultSet getAllStudents() {
+    public ArrayList<String> getAllStudents() {
+        ArrayList<String> allStudents = new ArrayList<>();
         try {
             statement.executeQuery("SELECT * FROM students");
-            return statement.getResultSet();
+            ResultSet returnSet = statement.getResultSet();
+            while (returnSet.next()) {
+                allStudents.add(String.format("student_id: %d, first_name: %s, last_name: %s, email: %s, enrollment_date: %s", returnSet.getInt("student_id"), returnSet.getString("first_name"), returnSet.getString("last_name"), returnSet.getString("email"), returnSet.getString("enrollment_date")));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(1);
         }
-        return null;
+        return allStudents;
     }
 
     public void addStudent(String first_name, String last_name, String email, String enrollment_date) {
