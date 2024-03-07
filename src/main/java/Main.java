@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 /**
  * Main class to demonstrate DatabaseController. Showcase its functions and displays results.
+ *
+ * @author YehanDeSilva 101185388
+ * @version 1
  */
 public class Main {
 

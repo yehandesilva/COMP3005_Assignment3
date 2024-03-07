@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 /**
  * Functions to query/update database.
+ *
+ * @author YehanDeSilva 101185388
+ * @version 1
  */
 public class DatabaseController {
 
