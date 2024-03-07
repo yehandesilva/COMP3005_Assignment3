@@ -14,5 +14,6 @@ Written in Java using a PostgreSQL JDBC Driver to connect to a PostgreSQL databa
 5) Run main method of Main class
 
 ## Videos
+- Two videos since I was only able to record one application at a time
 - [Code Breakdown](https://youtu.be/bpWSdVIeBrQ)
 - [Database](https://youtu.be/o3SCzQm4YuI)
