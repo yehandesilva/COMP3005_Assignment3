@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -6,7 +9,10 @@ import java.sql.Statement;
 public class DatabaseController {
 
     private Connection connection;
-    Statement statement;
+    private Statement statement;
+
+    public static final String CREATION_FILEPATH = "src/main/resources/creationSQL.txt";
+    public static final String INSERTION_FILEPATH = "src/main/resources/insertionSQL.txt";
 
     public DatabaseController(String url, String user, String password) {
         try {
@@ -21,7 +27,13 @@ public class DatabaseController {
     }
 
     public void setupTable() {
-
+        try {
+            statement.executeUpdate(this.parseSQLFile(CREATION_FILEPATH));
+            statement.executeUpdate(this.parseSQLFile(INSERTION_FILEPATH));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     public void closeController() {
@@ -47,6 +59,21 @@ public class DatabaseController {
 
     public void deleteStudent(int student_id) {
 
+    }
+
+    public String parseSQLFile(String filename) {
+        String line;
+        StringBuilder sqlQuery = new StringBuilder();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filename));
+            while ((line = reader.readLine()) != null) {
+                sqlQuery.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return sqlQuery.toString();
     }
 
 }

@@ -5,6 +5,8 @@ public class Main {
         String password = "admin";
 
         DatabaseController controller = new DatabaseController(url, user, password);
+        controller.setupTable();
+        controller.closeController();
 
     }
 }
