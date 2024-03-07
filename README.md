@@ -1,6 +1,9 @@
 # COMP 3005 - ASSIGNMENT 3
 
-### Setup Instructions
+## Project Details
+Written in Java using a PostgreSQL JDBC Driver to connect to a PostgreSQL database.
+
+## Setup Instructions
 1) Create postgres database called "COMP3005-ASSIGNMENT3"
 2) Ensure authorization username and password are "postgres" and "admin" respectively
 3) If errors arise, try modifying database parameters in main method to suite your specific database
